@@ -25,7 +25,16 @@ service "nscd" do
   action [:enable, :start]
 end
 
-%w{ passwd group }.each do |cmd| 
+template '/etc/nscd.conf' do
+  source 'nscd.conf.erb'
+  variables(
+    :cache_hosts => node['nscd']['cache_hosts']
+  )
+  mode 0644
+  notifies :restart, 'service[nscd]'
+end
+
+%w{ passwd group }.each do |cmd|
   execute "nscd-clear-#{cmd}" do
     command "/usr/sbin/nscd -i #{cmd}"
     action :nothing

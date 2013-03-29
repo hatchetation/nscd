@@ -33,6 +33,14 @@ commands, e.g.,
       notifies :run, "execute[nscd-clear-group]", :immediately
     end
 
+Caveats
+=======
+
+Because nscd is operating in shared mode when caching, `nscd -g` gives
+misleading results when reporting hit ratios. For more details, see:
+
+http://prefetch.net/blog/index.php/2006/02/08/viewing-name-service-cache-statistics/
+
 License and Author
 ==================
 
