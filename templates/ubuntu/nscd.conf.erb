@@ -67,7 +67,7 @@
 <% else -%>
 	enable-cache		hosts		no
 <% end -%>
-	positive-time-to-live	hosts		3600
+	positive-time-to-live	hosts		<%= @hosts_ttl %>
 	negative-time-to-live	hosts		20
 	suggested-size		hosts		211
 	check-files		hosts		yes

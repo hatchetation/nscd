@@ -29,7 +29,8 @@ end
 template '/etc/nscd.conf' do
   source 'nscd.conf.erb'
   variables(
-    :cache_hosts => node['nscd']['cache_hosts']
+    :cache_hosts => node['nscd']['cache_hosts'],
+    :hosts_ttl => node['nscd']['hosts_ttl'],
   )
   mode 0644
   notifies :restart, 'service[nscd]'
