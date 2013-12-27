@@ -29,6 +29,9 @@ service 'nscd' do
 end
 
 template '/etc/nscd.conf' do
+  variables(
+    cfg: node['nscd']
+  )
   notifies :restart, 'service[nscd]'
 end
 

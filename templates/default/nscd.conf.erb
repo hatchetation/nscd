@@ -33,8 +33,8 @@
 #	logfile			/var/log/nscd.log
 #	threads			4
 #	max-threads		32
-<% if node['nscd']['user'] -%>
-	server-user		<%= node['nscd']['user'] %>
+<% if @cfg['user'] -%>
+	server-user		<%= @cfg['user'] %>
 <% else -%>
 #	server-user		nobody
 <% end -%>
@@ -44,7 +44,7 @@
 	paranoia		no
 #	restart-interval	3600
 
-	enable-cache		passwd		<%= node['nscd']['passwd']['enable_cache'] ? 'yes' : 'no' %>
+	enable-cache		passwd		<%= @cfg['passwd']['enable_cache'] ? 'yes' : 'no' %>
 	positive-time-to-live	passwd		600
 	negative-time-to-live	passwd		20
 	suggested-size		passwd		211
@@ -54,7 +54,7 @@
 	max-db-size		passwd		33554432
 	auto-propagate		passwd		yes
 
-	enable-cache		group 		<%= node['nscd']['group']['enable_cache'] ? 'yes' : 'no' %>
+	enable-cache		group 		<%= @cfg['group']['enable_cache'] ? 'yes' : 'no' %>
 	positive-time-to-live	group		3600
 	negative-time-to-live	group		60
 	suggested-size		group		211
@@ -64,7 +64,7 @@
 	max-db-size		group		33554432
 	auto-propagate		group		yes
 
-	enable-cache		hosts		<%= node['nscd']['hosts']['enable_cache'] ? 'yes' : 'no' %>
+	enable-cache		hosts		<%= @cfg['hosts']['enable_cache'] ? 'yes' : 'no' %>
 	positive-time-to-live	hosts		3600
 	negative-time-to-live	hosts		20
 	suggested-size		hosts		211
@@ -73,7 +73,7 @@
 	shared			hosts		yes
 	max-db-size		hosts		33554432
 
-	enable-cache		services	<%= node['nscd']['services']['enable_cache'] ? 'yes' : 'no' %>
+	enable-cache		services	<%= @cfg['services']['enable_cache'] ? 'yes' : 'no' %>
 	positive-time-to-live	services	28800
 	negative-time-to-live	services	20
 	suggested-size		services	211
@@ -82,7 +82,7 @@
 	shared			services	yes
 	max-db-size		services	33554432
 
-	enable-cache		netgroup	<%= node['nscd']['netgroup']['enable_cache'] ? 'yes' : 'no' %>
+	enable-cache		netgroup	<%= @cfg['netgroup']['enable_cache'] ? 'yes' : 'no' %>
 	positive-time-to-live	netgroup	28800
 	negative-time-to-live	netgroup	20
 	suggested-size		netgroup	211
