@@ -28,6 +28,10 @@ service 'nscd' do
   action   [:enable, :start]
 end
 
+template '/etc/nscd.conf' do
+  notifies :restart, 'service[nscd]'
+end
+
 %w[passwd group].each do |cmd|
   execute "nscd-clear-#{cmd}" do
     command "/usr/sbin/nscd -i #{cmd}"

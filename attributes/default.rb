@@ -19,3 +19,19 @@
 
 # Possible values: nscd, unscd, gnscd
 default['nscd']['package'] = 'nscd'
+
+default['nscd']['passwd']['enable_cache'] = true
+default['nscd']['group']['enable_cache'] = true
+default['nscd']['hosts']['enable_cache'] = true
+default['nscd']['services']['enable_cache'] = true
+default['nscd']['netgroup']['enable_cache'] = true
+
+case node['platform_family']
+when "debian"
+  default['nscd']['user'] = 'nobody'
+  default['nscd']['netgroup']['enable_cache'] = false
+when "rhel"
+  default['nscd']['user'] = 'nscd'
+else
+  default['nscd']['user'] = nil
+end
